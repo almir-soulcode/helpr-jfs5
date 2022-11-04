@@ -14,12 +14,14 @@ import javax.annotation.PostConstruct;
 @Profile("dev") // será instanciada apenas se o perfil ativo for "dev"
 public class DevConfig {
     // Esta classe irá chamar o PopulateService caso o perfil ativo seja de desenvolvimento
-    @Autowired
+    @Autowired // injeta o service na classe config
     private PopulateService populateService;
 
+    // é ler as .properties
     @Value("${spring.jpa.hibernate.ddl-auto}") // vai acessar a propriedade
     private String ddlAuto;
 
+    // Após construir o DevConfig, executa o método abaixo
     @PostConstruct // faz com que o método execute após a instância ser criada
     public void init() {
         // se o modo for create, insere os dados fictícios
