@@ -1,11 +1,11 @@
 package org.soulcodeacademy.helpr.repositories;
 
 import org.soulcodeacademy.helpr.domain.Cargo;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository // indica que a interface é um repository
-public interface CargoRepository extends CrudRepository<Cargo, Integer> { // <Entidade, PK>
+public interface CargoRepository extends JpaRepository<Cargo, Integer> { // <Entidade, PK>
 }
 
 // Repository = é um recurso que permite manipular a entidade no banco de dados
@@ -13,3 +13,4 @@ public interface CargoRepository extends CrudRepository<Cargo, Integer> { // <En
 // Indicar qual a entidade vai ser gerenciada pelo repository e qual o tipo da PK.
 // Obs: O Spring gera uma classe dinâmica com base em nossa interface CargoRepository
 // CrudRepository = contém as operações básicas de um banco de dados
+// JpaRepository = possui mais funcionalidades p/ tratar a entidade
