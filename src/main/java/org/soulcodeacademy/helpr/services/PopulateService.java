@@ -1,8 +1,10 @@
 package org.soulcodeacademy.helpr.services;
 
 import org.soulcodeacademy.helpr.domain.Cargo;
+import org.soulcodeacademy.helpr.domain.Cliente;
 import org.soulcodeacademy.helpr.domain.Funcionario;
 import org.soulcodeacademy.helpr.repositories.CargoRepository;
+import org.soulcodeacademy.helpr.repositories.ClienteRepository;
 import org.soulcodeacademy.helpr.repositories.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,9 @@ public class PopulateService {
     @Autowired
     private FuncionarioRepository funcionarioRepository;
 
+    @Autowired
+    private ClienteRepository clienteRepository;
+
     public void populate() {
         // Integer idCargo, String nome, String descricao, Double salario
         Cargo c1 = new Cargo(null, "Diretor Geral", "Gerencia a empresa", 30000.0);
@@ -24,8 +29,11 @@ public class PopulateService {
 
         // Integer id, String nome, String email, String cpf, String senha, String foto, Cargo cargo
         Funcionario f1 = new Funcionario(null, "Renato Pereira", "renato.pereira@gmail.com", "68258098144", "12345", null, c1);
-
         Funcionario f2 = new Funcionario(null, "Victor Icoma", "victor.icoma@gmail.com", "51127383671", "12345", null, c2);
+        // Integer id, String nome, String email, String cpf, String senha, String telefone
+
+        Cliente cl1 = new Cliente(null, "José Almir", "jose.almir@gmail.com", "12659185115", "batata", "9999999999");
+        Cliente cl2 = new Cliente(null, "Pedro João", "pedro@gmail.com", "37734168302", "batata", "9999999997");
 
         // vamos persistir as entidades = salvar no banco
         this.cargoRepository.save(c1); // INSERT INTO
@@ -34,6 +42,9 @@ public class PopulateService {
 
         this.funcionarioRepository.save(f1);
         this.funcionarioRepository.save(f2);
+
+        this.clienteRepository.save(cl1);
+        this.clienteRepository.save(cl2);
     }
 }
 
