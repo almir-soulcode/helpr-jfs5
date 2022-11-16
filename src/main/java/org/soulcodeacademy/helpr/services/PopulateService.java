@@ -1,13 +1,18 @@
 package org.soulcodeacademy.helpr.services;
 
 import org.soulcodeacademy.helpr.domain.Cargo;
+import org.soulcodeacademy.helpr.domain.Chamado;
 import org.soulcodeacademy.helpr.domain.Cliente;
 import org.soulcodeacademy.helpr.domain.Funcionario;
+import org.soulcodeacademy.helpr.domain.enums.StatusChamado;
 import org.soulcodeacademy.helpr.repositories.CargoRepository;
+import org.soulcodeacademy.helpr.repositories.ChamadoRepository;
 import org.soulcodeacademy.helpr.repositories.ClienteRepository;
 import org.soulcodeacademy.helpr.repositories.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 // Torna o objeto de PopulateService disponível para toda a aplicação (global)
 @Service // indica para o Spring que esta classe será gerenciada por ele
@@ -20,6 +25,9 @@ public class PopulateService {
 
     @Autowired
     private ClienteRepository clienteRepository;
+
+    @Autowired
+    private ChamadoRepository chamadoRepository;
 
     public void populate() {
         // Integer idCargo, String nome, String descricao, Double salario
@@ -35,16 +43,18 @@ public class PopulateService {
         Cliente cl1 = new Cliente(null, "José Almir", "jose.almir@gmail.com", "12659185115", "batata", "9999999999");
         Cliente cl2 = new Cliente(null, "Pedro João", "pedro@gmail.com", "37734168302", "batata", "9999999997");
 
+        Chamado ch1 = new Chamado(null, "Primeiro chamado do sistema", "Revisar as entidades criadas");
+        ch1.setCliente(cl1);
+        Chamado ch2 = new Chamado(null, "Ativar VPN do sistema", "Conectar aos servidores remotos");
+        ch2.setCliente(cl2);
+        ch2.setFuncionario(f1);
+        ch2.setStatus(StatusChamado.ATRIBUIDO);
+
         // vamos persistir as entidades = salvar no banco
-        this.cargoRepository.save(c1); // INSERT INTO
-        this.cargoRepository.save(c2);
-        this.cargoRepository.save(c3);
-
-        this.funcionarioRepository.save(f1);
-        this.funcionarioRepository.save(f2);
-
-        this.clienteRepository.save(cl1);
-        this.clienteRepository.save(cl2);
+        this.cargoRepository.saveAll(List.of(c1, c2, c3));
+        this.funcionarioRepository.saveAll(List.of(f1, f2));
+        this.clienteRepository.saveAll(List.of(cl1, cl2));
+        this.chamadoRepository.saveAll(List.of(ch1, ch2));
     }
 }
 
