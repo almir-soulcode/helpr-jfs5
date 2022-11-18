@@ -76,4 +76,21 @@ public class ChamadoService {
         return this.chamadoRepository.save(chamadoAtual);
     }
 
+    public List<Chamado> listarPorStatus(StatusChamado status) {
+        return this.chamadoRepository.findByStatus(status);
+    }
+
+    public List<Chamado> listarPorFuncionario(Integer idFuncionario) {
+        Funcionario funcionario = this.funcionarioService.getFuncionario(idFuncionario);
+        return this.chamadoRepository.findByFuncionario(funcionario);
+    }
+
+    public List<Chamado> listarPorCliente(Integer idCliente) {
+        Cliente cliente = this.clienteService.getCliente(idCliente);
+        return this.chamadoRepository.findByCliente(cliente);
+    }
+
+    public List<Chamado> listarPorIntervaloDatas(LocalDate data1, LocalDate data2) {
+        return this.chamadoRepository.buscarEntreDatas(data1, data2);
+    }
 }
