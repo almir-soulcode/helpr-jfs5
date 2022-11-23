@@ -4,12 +4,14 @@ import org.soulcodeacademy.helpr.domain.Cargo;
 import org.soulcodeacademy.helpr.domain.Chamado;
 import org.soulcodeacademy.helpr.domain.Cliente;
 import org.soulcodeacademy.helpr.domain.Funcionario;
+import org.soulcodeacademy.helpr.domain.enums.Perfil;
 import org.soulcodeacademy.helpr.domain.enums.StatusChamado;
 import org.soulcodeacademy.helpr.repositories.CargoRepository;
 import org.soulcodeacademy.helpr.repositories.ChamadoRepository;
 import org.soulcodeacademy.helpr.repositories.ClienteRepository;
 import org.soulcodeacademy.helpr.repositories.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +31,9 @@ public class PopulateService {
     @Autowired
     private ChamadoRepository chamadoRepository;
 
+    @Autowired
+    private PasswordEncoder encoder;
+
     public void populate() {
         // Integer idCargo, String nome, String descricao, Double salario
         Cargo c1 = new Cargo(null, "Diretor Geral", "Gerencia a empresa", 30000.0);
@@ -36,12 +41,13 @@ public class PopulateService {
         Cargo c3 = new Cargo(null, "Técnico geral", "Resolve os chamados urgentes", 12000.0);
 
         // Integer id, String nome, String email, String cpf, String senha, String foto, Cargo cargo
-        Funcionario f1 = new Funcionario(null, "Renato Pereira", "renato.pereira@gmail.com", "68258098144", "12345", null, c1);
-        Funcionario f2 = new Funcionario(null, "Victor Icoma", "victor.icoma@gmail.com", "51127383671", "12345", null, c2);
+        Funcionario f1 = new Funcionario(null, "Renato Pereira", "renato.pereira@gmail.com", "68258098144", encoder.encode("12345"), null, c1);
+        f1.setPerfil(Perfil.ADMIN);
+        Funcionario f2 = new Funcionario(null, "Victor Icoma", "victor.icoma@gmail.com", "51127383671", encoder.encode("12345"), null, c2);
         // Integer id, String nome, String email, String cpf, String senha, String telefone
 
-        Cliente cl1 = new Cliente(null, "José Almir", "jose.almir@gmail.com", "12659185115", "batata", "9999999999");
-        Cliente cl2 = new Cliente(null, "Pedro João", "pedro@gmail.com", "37734168302", "batata", "9999999997");
+        Cliente cl1 = new Cliente(null, "José Almir", "jose.almir@gmail.com", "12659185115", encoder.encode("batata"), "9999999999");
+        Cliente cl2 = new Cliente(null, "Pedro João", "pedro@gmail.com", "37734168302", encoder.encode("batata"), "9999999997");
 
         Chamado ch1 = new Chamado(null, "Primeiro chamado do sistema", "Revisar as entidades criadas");
         ch1.setCliente(cl1);
