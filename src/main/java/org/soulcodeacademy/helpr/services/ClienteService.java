@@ -3,6 +3,7 @@ package org.soulcodeacademy.helpr.services;
 import org.soulcodeacademy.helpr.domain.Cliente;
 import org.soulcodeacademy.helpr.domain.dto.ClienteDTO;
 import org.soulcodeacademy.helpr.repositories.ClienteRepository;
+import org.soulcodeacademy.helpr.services.errors.RecursoNaoEncontradoError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,7 @@ public class ClienteService {
 
         if (cliente.isEmpty()) {
             // lançar exceção
-            throw new RuntimeException("Cliente não encontrado!");
+            throw new RecursoNaoEncontradoError("Cliente não encontrado!");
         } else {
             return cliente.get();
         }
