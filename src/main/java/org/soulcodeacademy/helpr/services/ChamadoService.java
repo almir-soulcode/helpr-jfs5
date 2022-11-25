@@ -6,6 +6,8 @@ import org.soulcodeacademy.helpr.domain.Funcionario;
 import org.soulcodeacademy.helpr.domain.dto.ChamadoDTO;
 import org.soulcodeacademy.helpr.domain.enums.StatusChamado;
 import org.soulcodeacademy.helpr.repositories.ChamadoRepository;
+import org.soulcodeacademy.helpr.services.errors.ParametrosInsuficientesError;
+import org.soulcodeacademy.helpr.services.errors.RecursoNaoEncontradoError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +32,7 @@ public class ChamadoService {
     public Chamado getChamado(Integer idChamado) {
         // Caso não encontre o chamado, lança a exceção.
         return this.chamadoRepository.findById(idChamado)
-                .orElseThrow(() -> new RuntimeException("Chamado não encontrado"));
+                .orElseThrow(() -> new RecursoNaoEncontradoError("Chamado não encontrado"));
     }
 
     public Chamado salvar(ChamadoDTO dto) {
@@ -50,7 +52,7 @@ public class ChamadoService {
         chamadoAtual.setCliente(cliente);
 
         if (dto.getIdFuncionario() == null) {
-            throw new RuntimeException("idFuncionario obrigatório");
+            throw new ParametrosInsuficientesError("idFuncionario obrigatório");
         } else {
             Funcionario funcionario = this.funcionarioService.getFuncionario(dto.getIdFuncionario());
 
