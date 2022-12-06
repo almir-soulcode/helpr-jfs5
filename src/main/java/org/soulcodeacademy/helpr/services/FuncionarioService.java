@@ -28,14 +28,9 @@ public class FuncionarioService {
     }
 
     public Funcionario getFuncionario(Integer idFuncionario) {
-        // Optional = pode existir ou não a entidade
-        Optional<Funcionario> funcionario = this.funcionarioRepository.findById(idFuncionario);
 
-        if (funcionario.isEmpty()) {
-            throw new RecursoNaoEncontradoError("O funcionário não foi encontrado!");
-        } else {
-            return funcionario.get(); // pega o valor da entidade encontrada
-        }
+        return this.funcionarioRepository.findById(idFuncionario).
+                orElseThrow(() -> new RecursoNaoEncontradoError("Funcionário não encontrado"));
     }
 
     public Funcionario salvar(FuncionarioDTO dto) {
