@@ -14,6 +14,9 @@ public class FuturoCliente {
     @Column(nullable = false, length = 150)
     protected String nome;
 
+    @Column(length = 25)
+    private String telefone;
+
     @Column(nullable = false, unique = true, length = 120)
     protected String email;
 
@@ -22,9 +25,10 @@ public class FuturoCliente {
 
     public FuturoCliente (){}
 
-    public FuturoCliente(Integer id, String nome, String email, String cpf) {
+    public FuturoCliente(Integer id, String nome, String telefone, String email, String cpf) {
         this.id = id;
         this.nome = nome;
+        this.telefone = telefone;
         this.email = email;
         this.cpf = cpf;
     }
@@ -45,6 +49,14 @@ public class FuturoCliente {
         this.nome = nome;
     }
 
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -59,5 +71,15 @@ public class FuturoCliente {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    @Override
+    public String toString() {
+        return "FuturoCliente{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", cpf='" + cpf + '\'' +
+                '}';
     }
 }
