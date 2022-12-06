@@ -1,20 +1,15 @@
 package org.soulcodeacademy.helpr.services;
 
-import org.soulcodeacademy.helpr.domain.Cargo;
-import org.soulcodeacademy.helpr.domain.Chamado;
-import org.soulcodeacademy.helpr.domain.Cliente;
-import org.soulcodeacademy.helpr.domain.Funcionario;
+import org.soulcodeacademy.helpr.domain.*;
 import org.soulcodeacademy.helpr.domain.enums.Perfil;
 import org.soulcodeacademy.helpr.domain.enums.StatusChamado;
-import org.soulcodeacademy.helpr.repositories.CargoRepository;
-import org.soulcodeacademy.helpr.repositories.ChamadoRepository;
-import org.soulcodeacademy.helpr.repositories.ClienteRepository;
-import org.soulcodeacademy.helpr.repositories.FuncionarioRepository;
+import org.soulcodeacademy.helpr.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 // Torna o objeto de PopulateService disponível para toda a aplicação (global)
 @Service // indica para o Spring que esta classe será gerenciada por ele
@@ -33,6 +28,9 @@ public class PopulateService {
 
     @Autowired
     private PasswordEncoder encoder;
+
+    @Autowired
+    private FuturoClienteRepository futuroClienteRepository;
 
     public void populate() {
         // Integer idCargo, String nome, String descricao, Double salario
@@ -61,6 +59,14 @@ public class PopulateService {
         this.funcionarioRepository.saveAll(List.of(f1, f2));
         this.clienteRepository.saveAll(List.of(cl1, cl2));
         this.chamadoRepository.saveAll(List.of(ch1, ch2));
+
+        // Dados do futuro cliente
+        FuturoCliente futuroCliente1 = new FuturoCliente(null, "Pedro Oliveira", "(11) 99943-3234", "pedro@gmail.com", "32345323456");
+        FuturoCliente futuroCliente2 = new FuturoCliente(null, "Luiz Souza", "(11) 94323-2345", "luiz@gmail.com", "32432454354");
+        this.futuroClienteRepository.save(futuroCliente1);
+        this.futuroClienteRepository.save(futuroCliente2);
+
+
     }
 }
 
