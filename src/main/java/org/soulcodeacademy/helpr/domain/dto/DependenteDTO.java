@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class DependenteDTO {
-    @NotBlank(message = "Campo dependente obrigatório")
+    @NotBlank(message = "Campo Dependente obrigatório")
     private String nome;
 
     @NotBlank(message = "Campo CPF obrigatório")

@@ -4,7 +4,6 @@ import javax.validation.constraints.NotNull;
 
 public class FuncionarioDTO extends UsuarioDTO {
     private String foto;
-
     @NotNull(message = "idCargo é obrigatório")
     private Integer idCargo;
 
