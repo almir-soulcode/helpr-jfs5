@@ -1,11 +1,8 @@
 package org.soulcodeacademy.helpr.domain.dto;
 
 import org.hibernate.validator.constraints.br.CPF;
-import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 public class FuturoClienteDTO {
 
@@ -23,14 +20,11 @@ public class FuturoClienteDTO {
     @NotBlank(message = "CPF é obrigatório")
     private String cpf;
 
-    public FuturoClienteDTO (String cpf){
-        this.cpf = cpf;
-    }
+
 
     public String getNome() {
         return nome;
     }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -38,10 +32,19 @@ public class FuturoClienteDTO {
     public String getTelefone() {
         return telefone;
     }
-
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+
+    public String getEmail() {
+        return email;}
+    public void setEmail(String email) {
+        this.email = email;}
+
+    public String getCpf() {
+        return cpf;}
+    public void setCpf(String cpf) {
+        this.cpf = cpf;}
 }
 
 
