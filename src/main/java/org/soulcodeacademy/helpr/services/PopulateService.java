@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +32,9 @@ public class PopulateService {
 
     @Autowired
     private FuturoClienteRepository futuroClienteRepository;
+
+    @Autowired
+    private DependenteRepository dependenteRepository;
 
     public void populate() {
         // Integer idCargo, String nome, String descricao, Double salario
@@ -72,8 +76,41 @@ public class PopulateService {
 
         System.out.println(limite.get());
 
+        // Dados de Dependente Teste
+        //Nome;
+        //CPF;
+        //Data de Nascimento;
+        //Escolaridade;
+        Dependente dependente1 = new Dependente(null,"Bianca Torres","123.123.123-33", LocalDate.of(2002,12,12), "Ensino Médio");
+        dependente1.setResponsavel(f1); //Antes de salvar, utiliza-se o método set para associar dependente a funcionário
+        this.dependenteRepository.save(dependente1);
+
+        Dependente dependente2 = new Dependente(null,"Amanda Aparecida","080.123.123-24", LocalDate.of(2010,01,12), "Ensino Fundamental");
+        dependente2.setResponsavel(f1); //Antes de salvar, utiliza-se o método set para associar dependente a funcionário
+        this.dependenteRepository.save(dependente2);
+
+        //Dependente dependente = this.dependenteRepository.findByCpf("123.123.123-00")
+        //        .orElseThrow(()-> new RuntimeException("CPF não encontrado!")); //Optional
+
+        //System.out.println(dependente.toString());
+
+       //List<Dependente> dependentes = this.dependenteRepository.findByEscolaridade("Ensino Fundamental");
+        //System.out.println(dependentes.toString()); //List
+
+        //List<Dependente> dependentesDoResponsavel = this.dependenteRepository.findByResponsavel(f1);
+        //.out.println(dependentesDoResponsavel.toString());
+
+       LocalDate data1= LocalDate.of(1999,11,21);
+        LocalDate data2= LocalDate.of(2013,11,21);
+
+       List<Dependente> buscarEntreDatas= this.dependenteRepository.buscarEntreDatas(data1, data2);
+        if (buscarEntreDatas.isEmpty()) {
+            throw new RuntimeException("Não existe depentes neste intervalo de datas!");
+        }
+        System.out.println(buscarEntreDatas.toString());
     }
 }
+
 
 // O objetivo desta classe é inserir no banco, dados fictícios (de teste)
 // IOC = Inversion of Control = Inversão de Controle = É ele quem manda nas instâncias
