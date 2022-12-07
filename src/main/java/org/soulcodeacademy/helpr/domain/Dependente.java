@@ -75,7 +75,7 @@ public class Dependente {
         return escolaridade;
     }
 
-    public void setEscolaridade(String escolaridade) {
+    public void setEscolaridade (String escolaridade) {
         this.escolaridade = escolaridade;
     }
 
