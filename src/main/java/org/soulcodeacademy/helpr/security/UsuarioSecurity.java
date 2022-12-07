@@ -1,6 +1,8 @@
 package org.soulcodeacademy.helpr.security;
 
+import org.hibernate.cfg.Environment;
 import org.soulcodeacademy.helpr.domain.enums.Perfil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,6 +30,9 @@ public class UsuarioSecurity implements UserDetails {
         // Adiciona a descrição do perfil como uma role do usuário
         this.authorities.add(new SimpleGrantedAuthority(perfil.getDescricao()));
     }
+
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -72,4 +77,7 @@ public class UsuarioSecurity implements UserDetails {
     }
     // Indicamos por meios dos getters o estado de autenticação/autorização
     // dos nossos usuários salvos no banco de dados
+
+
+
 }
