@@ -22,7 +22,7 @@ public class FuturoCliente {
     private String telefone;
 
     @Column(nullable = false, unique = true, length = 11)
-    protected String cpf;
+    private String cpf;
 
 
     public FuturoCliente() {}

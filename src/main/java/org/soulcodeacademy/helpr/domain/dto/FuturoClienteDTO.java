@@ -17,11 +17,11 @@ public class FuturoClienteDTO {
 
     @Email(message = "Email inválido")
     @NotBlank(message = "Email é obrigatório")
-    protected String email;
+    private String email;
 
     @CPF(message = "CPF é inválido")
     @NotBlank(message = "CPF é obrigatório")
-    protected String cpf;
+    private String cpf;
 
     public FuturoClienteDTO (String cpf){
         this.cpf = cpf;
