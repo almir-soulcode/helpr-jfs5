@@ -1,4 +1,4 @@
-package org.soulcodeacademy.helpr.security;
+package org.soulcodeacademy.helpr.services.security;
 
 // Objetivo desta classe é:
 // Validar JWT, Gerar JWT e extrair dados do JWT

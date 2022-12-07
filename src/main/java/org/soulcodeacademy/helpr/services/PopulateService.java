@@ -1,15 +1,9 @@
 package org.soulcodeacademy.helpr.services;
 
-import org.soulcodeacademy.helpr.domain.Cargo;
-import org.soulcodeacademy.helpr.domain.Chamado;
-import org.soulcodeacademy.helpr.domain.Cliente;
-import org.soulcodeacademy.helpr.domain.Funcionario;
+import org.soulcodeacademy.helpr.domain.*;
 import org.soulcodeacademy.helpr.domain.enums.Perfil;
 import org.soulcodeacademy.helpr.domain.enums.StatusChamado;
-import org.soulcodeacademy.helpr.repositories.CargoRepository;
-import org.soulcodeacademy.helpr.repositories.ChamadoRepository;
-import org.soulcodeacademy.helpr.repositories.ClienteRepository;
-import org.soulcodeacademy.helpr.repositories.FuncionarioRepository;
+import org.soulcodeacademy.helpr.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -61,6 +55,8 @@ public class PopulateService {
         this.funcionarioRepository.saveAll(List.of(f1, f2));
         this.clienteRepository.saveAll(List.of(cl1, cl2));
         this.chamadoRepository.saveAll(List.of(ch1, ch2));
+
+
     }
 }
 

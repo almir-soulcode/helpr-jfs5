@@ -1,4 +1,4 @@
-package org.soulcodeacademy.helpr.security;
+package org.soulcodeacademy.helpr.services.security;
 
 import org.soulcodeacademy.helpr.domain.enums.Perfil;
 import org.springframework.security.core.GrantedAuthority;

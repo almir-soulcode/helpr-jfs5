@@ -1,6 +1,6 @@
 package org.soulcodeacademy.helpr.config;
 
-import org.soulcodeacademy.helpr.security.TokenFilter;
+import org.soulcodeacademy.helpr.services.security.TokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;

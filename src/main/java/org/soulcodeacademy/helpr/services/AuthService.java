@@ -2,8 +2,8 @@ package org.soulcodeacademy.helpr.services;
 
 import org.soulcodeacademy.helpr.domain.dto.CredenciaisDTO;
 import org.soulcodeacademy.helpr.domain.dto.TokenDTO;
-import org.soulcodeacademy.helpr.security.TokenUtil;
-import org.soulcodeacademy.helpr.security.UsuarioSecurityService;
+import org.soulcodeacademy.helpr.services.security.TokenUtil;
+import org.soulcodeacademy.helpr.services.security.UsuarioSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
