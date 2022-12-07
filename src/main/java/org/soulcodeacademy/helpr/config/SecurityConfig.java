@@ -1,8 +1,10 @@
+
 package org.soulcodeacademy.helpr.config;
 
 import org.soulcodeacademy.helpr.security.TokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -18,6 +20,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.Arrays;
 import java.util.List;
 
 @EnableWebSecurity // Indica que esta classe irá configurar a segurança da aplicação
@@ -25,10 +28,13 @@ import java.util.List;
 public class SecurityConfig {
     // /auth/login, /auth/cadastro, /auth/logout
     // /cargos/** -> /cargos/filtrar, /cargos/1
-    private static final String[] PUBLIC_ENDPOINTS = {"/auth/**"}; // aqui iremos colocar as principais rotas publicas
+    private static final String[] PUBLIC_ENDPOINTS = {"/auth/**", "/h2-console/**"}; // aqui iremos colocar as principais rotas publicas
 
     @Autowired
     private TokenFilter filter;
+
+    @Autowired
+    private Environment env;
 
     @Bean // esta anotação permite que retornemos um objeto que pode ser injetado em outras classes
     public PasswordEncoder passwordEncoder() {
@@ -45,6 +51,10 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        if(Arrays.asList(env.getActiveProfiles()).contains("teste")) {
+            http.headers().frameOptions().disable();
+        }
+
         // Definimos o CORS como habilitado e desabilitamos o CSRF pois não tem necessidade ativar
         http.cors().and().csrf().disable();
         // Aqui podemos permitir/autorizar ou bloquear certos endpoints da aplicação
