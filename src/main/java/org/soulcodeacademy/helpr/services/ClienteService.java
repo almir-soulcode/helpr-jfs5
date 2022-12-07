@@ -3,6 +3,7 @@ package org.soulcodeacademy.helpr.services;
 import org.soulcodeacademy.helpr.domain.Cliente;
 import org.soulcodeacademy.helpr.domain.dto.ClienteDTO;
 import org.soulcodeacademy.helpr.repositories.ClienteRepository;
+import org.soulcodeacademy.helpr.services.errors.ParametrosInsuficientesError;
 import org.soulcodeacademy.helpr.services.errors.RecursoNaoEncontradoError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,12 +34,20 @@ public class ClienteService {
 
     public Cliente salvar(ClienteDTO dto) {
         // Criação da entidade Cliente, a partir dos dados validados do DTO
+        if (dto.getSenha()==null) {
+            throw new ParametrosInsuficientesError("Senha nulla");
+        }
         Cliente novoCliente = new Cliente(null, dto.getNome(), dto.getEmail(), dto.getCpf(), dto.getSenha(), dto.getTelefone());
 
-        return this.clienteRepository.save(novoCliente);
+            return this.clienteRepository.save(novoCliente);
+
     }
 
+
     public Cliente atualizar(Integer idCliente, ClienteDTO dto) {
+        if (dto.getSenha()==null) {
+            throw new ParametrosInsuficientesError("Senha nulla");
+        }
         Cliente clienteAtual = this.getCliente(idCliente);
         clienteAtual.setNome(dto.getNome());
         clienteAtual.setEmail(dto.getEmail());
@@ -53,6 +62,7 @@ public class ClienteService {
         Cliente cliente = this.getCliente(idCliente);
         this.clienteRepository.delete(cliente);
     }
+
 }
 
 // Quando usar entidade e dto?

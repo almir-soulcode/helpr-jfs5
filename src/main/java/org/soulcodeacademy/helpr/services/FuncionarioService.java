@@ -4,6 +4,7 @@ import org.soulcodeacademy.helpr.domain.Cargo;
 import org.soulcodeacademy.helpr.domain.Funcionario;
 import org.soulcodeacademy.helpr.domain.dto.FuncionarioDTO;
 import org.soulcodeacademy.helpr.repositories.FuncionarioRepository;
+import org.soulcodeacademy.helpr.services.errors.ParametrosInsuficientesError;
 import org.soulcodeacademy.helpr.services.errors.RecursoNaoEncontradoError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,9 @@ public class FuncionarioService {
     }
 
     public Funcionario salvar(FuncionarioDTO dto) {
+        if (dto.getSenha()==null){
+            throw new ParametrosInsuficientesError("Senha Nulla");
+        }
         Cargo cargo = this.cargoService.getCargo(dto.getIdCargo()); // verifica se o cargo existe mesmo
         // id, nome, email,cpf, String senha, foto, cargo
         // Transferindo informações do DTO para nossa entidade
@@ -49,6 +53,9 @@ public class FuncionarioService {
     }
 
     public Funcionario atualizar(Integer idFuncionario, FuncionarioDTO dto) {
+        if (dto.getSenha()==null){
+            throw new ParametrosInsuficientesError("Senha Nulla");
+        }
         // Busca o funcionario com o idFuncionario
         Funcionario funcionarioAtual = this.getFuncionario(idFuncionario);
         // Busca os dados do cargo a ser alterado
