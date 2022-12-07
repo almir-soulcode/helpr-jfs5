@@ -8,7 +8,7 @@ public class FuturoCliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idFuturoCliente;
-    @Column (nullable = false, length = 50)
+    @Column(nullable = false, length = 120)
     private String nome;
     @Column (nullable = false)
     private String telefone;
