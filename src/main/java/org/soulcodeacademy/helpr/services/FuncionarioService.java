@@ -4,6 +4,7 @@ import org.soulcodeacademy.helpr.domain.Cargo;
 import org.soulcodeacademy.helpr.domain.Funcionario;
 import org.soulcodeacademy.helpr.domain.dto.FuncionarioDTO;
 import org.soulcodeacademy.helpr.repositories.FuncionarioRepository;
+import org.soulcodeacademy.helpr.services.errors.DataIntegrityViolationException;
 import org.soulcodeacademy.helpr.services.errors.RecursoNaoEncontradoError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,6 +63,12 @@ public class FuncionarioService {
 
     public void deletar(Integer idFuncionario) {
         Funcionario funcionario = this.getFuncionario(idFuncionario);
-        this.funcionarioRepository.delete(funcionario);
+        try {
+            this.funcionarioRepository.delete(funcionario);
+
+        } catch (org.springframework.dao.DataIntegrityViolationException error){
+
+            throw new DataIntegrityViolationException("Não foi possível continuar operação");
+        }
     }
 }
