@@ -21,14 +21,8 @@ public class ClienteService {
 
     public Cliente getCliente(Integer idCliente) {
         // SELECT * FROM usuarios WHERE id = ?
-        Optional<Cliente> cliente = this.clienteRepository.findById(idCliente);
-
-        if (cliente.isEmpty()) {
-            // lançar exceção
-            throw new RecursoNaoEncontradoError("Cliente não encontrado!");
-        } else {
-            return cliente.get();
-        }
+        return this.clienteRepository.findById(idCliente)
+                    .orElseThrow(() -> new RecursoNaoEncontradoError("Cliente não encontrado"));
     }
 
     public Cliente salvar(ClienteDTO dto) {
