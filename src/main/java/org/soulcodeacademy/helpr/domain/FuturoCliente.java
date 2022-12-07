@@ -9,19 +9,19 @@ public class FuturoCliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Integer id;
+    private Integer id;
 
     @Column(nullable = false, length = 150)
-    protected String nome;
+    private String nome;
 
     @Column(length = 25)
     private String telefone;
 
     @Column(nullable = false, unique = true, length = 120)
-    protected String email;
+    private String email;
 
     @Column(nullable = false, unique = true, length = 11)
-    protected String cpf;
+    private String cpf;
 
     public FuturoCliente (){}
 
@@ -73,13 +73,5 @@ public class FuturoCliente {
         this.cpf = cpf;
     }
 
-    @Override
-    public String toString() {
-        return "FuturoCliente{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", email='" + email + '\'' +
-                ", cpf='" + cpf + '\'' +
-                '}';
-    }
+
 }

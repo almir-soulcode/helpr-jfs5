@@ -1,5 +1,6 @@
 package org.soulcodeacademy.helpr.services;
 
+import org.soulcodeacademy.helpr.controllers.errors.ResourceExceptionHandler;
 import org.soulcodeacademy.helpr.domain.Chamado;
 import org.soulcodeacademy.helpr.domain.Cliente;
 import org.soulcodeacademy.helpr.domain.Funcionario;
@@ -8,11 +9,13 @@ import org.soulcodeacademy.helpr.domain.enums.StatusChamado;
 import org.soulcodeacademy.helpr.repositories.ChamadoRepository;
 import org.soulcodeacademy.helpr.services.errors.ParametrosInsuficientesError;
 import org.soulcodeacademy.helpr.services.errors.RecursoNaoEncontradoError;
+import org.soulcodeacademy.helpr.services.errors.RecursosExcedidos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ChamadoService {
@@ -25,6 +28,8 @@ public class ChamadoService {
     @Autowired
     private FuncionarioService funcionarioService;
 
+    private Integer limiteChamado = 0;
+
     public List<Chamado> listarChamados() {
         return this.chamadoRepository.findAll();
     }
@@ -36,6 +41,7 @@ public class ChamadoService {
     }
 
     public Chamado salvar(ChamadoDTO dto) {
+        this.limiteDechamado(dto.getIdFuncionario());
         // Verificar se existe um cliente com este ID
         Cliente cliente = this.clienteService.getCliente(dto.getIdCliente());
         Chamado chamado = new Chamado(null, dto.getTitulo(), dto.getDescricao());
@@ -45,6 +51,7 @@ public class ChamadoService {
     }
 
     public Chamado atualizar(Integer idChamado, ChamadoDTO dto) {
+
         Chamado chamadoAtual = this.getChamado(idChamado);
         Cliente cliente = this.clienteService.getCliente(dto.getIdCliente());
         chamadoAtual.setTitulo(dto.getTitulo());
@@ -63,6 +70,7 @@ public class ChamadoService {
                     chamadoAtual.setDataFechamento(null);
                 }
                 case ATRIBUIDO -> {
+                    this.limiteDechamado(dto.getIdFuncionario());
                     chamadoAtual.setStatus(StatusChamado.ATRIBUIDO);
                     chamadoAtual.setFuncionario(funcionario);
                     chamadoAtual.setDataFechamento(null);
@@ -95,4 +103,17 @@ public class ChamadoService {
     public List<Chamado> listarPorIntervaloDatas(LocalDate data1, LocalDate data2) {
         return this.chamadoRepository.buscarEntreDatas(data1, data2);
     }
+
+    public void limiteDechamado(Integer idFuncionario){
+        Optional<Integer> limite = this.chamadoRepository.quantidadeDeChamados(idFuncionario);
+        this.limiteChamado = limite.get();
+        System.out.println(this.limiteChamado);
+        if (this.limiteChamado >=3){
+            throw new RecursosExcedidos("Excedeu o limite de chamados atribuidos para este funcionário");
+        }
+    }
+
+
+
+
 }

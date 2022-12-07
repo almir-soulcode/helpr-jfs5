@@ -66,6 +66,11 @@ public class PopulateService {
         this.futuroClienteRepository.save(futuroCliente1);
         this.futuroClienteRepository.save(futuroCliente2);
 
+        // Realizando a query
+
+        Optional<Integer> limite = this.chamadoRepository.quantidadeDeChamados(f1.getId());
+
+        System.out.println(limite.get());
 
     }
 }
