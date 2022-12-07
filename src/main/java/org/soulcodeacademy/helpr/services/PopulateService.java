@@ -56,6 +56,8 @@ public class PopulateService {
         ch2.setFuncionario(f1);
         ch2.setStatus(StatusChamado.ATRIBUIDO);
 
+
+
         // vamos persistir as entidades = salvar no banco
         this.cargoRepository.saveAll(List.of(c1, c2, c3));
         this.funcionarioRepository.saveAll(List.of(f1, f2));

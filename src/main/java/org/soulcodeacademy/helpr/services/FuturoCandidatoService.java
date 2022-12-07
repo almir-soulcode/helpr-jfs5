@@ -1,18 +1,13 @@
 package org.soulcodeacademy.helpr.services;
 
-import org.soulcodeacademy.helpr.domain.Cargo;
-import org.soulcodeacademy.helpr.domain.Cliente;
 import org.soulcodeacademy.helpr.domain.FuturoCandidato;
-import org.soulcodeacademy.helpr.domain.dto.ClienteDTO;
 import org.soulcodeacademy.helpr.domain.dto.FuturoCandidatoDTO;
 import org.soulcodeacademy.helpr.domain.enums.Setor;
-import org.soulcodeacademy.helpr.repositories.ChamadoRepository;
 import org.soulcodeacademy.helpr.repositories.FuturoCandidatoRepository;
 import org.soulcodeacademy.helpr.services.errors.RecursoNaoEncontradoError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,7 +34,7 @@ public class FuturoCandidatoService {
         return this.futuroCandidatoRepository.findByEmail(email);
    }
     public List<FuturoCandidato> listarPorNome(String nome){
-        return this.futuroCandidatoRepository.findByNomeContaining(nome);
+        return this.futuroCandidatoRepository.findByNomeCompletoContaining(nome);
     }
     public List<FuturoCandidato> listarPorSetor(Setor setor){
         return this.futuroCandidatoRepository.findBySetorContaining(setor);
