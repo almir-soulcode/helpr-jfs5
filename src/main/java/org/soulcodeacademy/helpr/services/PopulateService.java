@@ -1,9 +1,6 @@
 package org.soulcodeacademy.helpr.services;
 
-import org.soulcodeacademy.helpr.domain.Cargo;
-import org.soulcodeacademy.helpr.domain.Chamado;
-import org.soulcodeacademy.helpr.domain.Cliente;
-import org.soulcodeacademy.helpr.domain.Funcionario;
+import org.soulcodeacademy.helpr.domain.*;
 import org.soulcodeacademy.helpr.domain.enums.Perfil;
 import org.soulcodeacademy.helpr.domain.enums.StatusChamado;
 import org.soulcodeacademy.helpr.repositories.CargoRepository;
@@ -45,16 +42,16 @@ public class PopulateService {
         f1.setPerfil(Perfil.ADMIN);
         Funcionario f3 = new Funcionario(null, "Ricardo Santos", "ricardo.santos@gmail.com", "51127553672", encoder.encode("12345"), null, c2);
         f3.setPerfil(Perfil.ADMIN);
-        Funcionario f4 = new Funcionario(null, "Valeria Lima", "vl@gmail.com", "99987553672", encoder.encode("12345"), null, c3);
+        Funcionario f4 = new Funcionario(null, "Valeria Lima", "vl@gmail.com", "99987553672", encoder.encode("12345"), null, c1);
         f4.setPerfil(Perfil.ADMIN);
         Funcionario f5 = new Funcionario(null, "Kelly Nunes", "kn@gmail.com", "55522212211", encoder.encode("12345"), null, c1);
         f5.setPerfil(Perfil.ADMIN);
         Funcionario f6 = new Funcionario(null, "José Pereira", "jose.pereira@gmail.com", "41127383671", encoder.encode("12345"), null, c2);
-        Funcionario f7 = new Funcionario(null, "Henrique Martins", "henrique.martins@gmail.com", "41127333371", encoder.encode("12345"), null, c3);
+        Funcionario f7 = new Funcionario(null, "Henrique Martins", "henrique.martins@gmail.com", "41127333371", encoder.encode("12345"), null, c1);
         f7.setPerfil(Perfil.ADMIN);
 
         Funcionario f2 = new Funcionario(null, "Almir José", "almir.jose@gmail.com", "42222383333", encoder.encode("12345"), null, c2);
-        Funcionario f8 = new Funcionario(null, "Gabriel Braga", "gabriel.braga@gmail.com", "49999383671", encoder.encode("12345"), null, c3);
+        Funcionario f8 = new Funcionario(null, "Gabriel Braga", "gabriel.braga@gmail.com", "49999383671", encoder.encode("12345"), null, c1);
         Funcionario f9 = new Funcionario(null, "Victor Icoma", "victor.icoma@gmail.com", "45555383671", encoder.encode("12345"), null, c1);
         Funcionario f10 = new Funcionario(null, "Vanessa Santos", "vanessa.santos@gmail.com", "44444383671", encoder.encode("12345"), null, c2);
 
@@ -77,14 +74,16 @@ public class PopulateService {
         Chamado ch4 = new Chamado(null, "Entrega de equipamento", "Entrega de equipamento para novo funcionário");
         ch4.setCliente(cl4);
         Chamado ch5 = new Chamado(null, "Reunir time de desenvolvimento", "Alinhamento para criar projeto de novo cliente");
-        ch5.setCliente(cl5);
+        ch5.setCliente(cl4);
         Chamado ch6 = new Chamado(null, "Solicitar férias", "Solicitar emissão de férias");
         ch6.setCliente(cl1);
         ch6.setStatus(StatusChamado.CONCLUIDO);
         Chamado ch7 = new Chamado(null, "Conflito na main", "Corrigir conflito na main do produto X");
-        ch7.setCliente(cl5);
+        ch7.setCliente(cl3);
         ch7.setStatus(StatusChamado.CONCLUIDO);
 
+
+        FuturoCliente fc1 = new FuturoCliente(null, "Josefina Mendes", "88889954",  "jm@gmail.com", "544558855");
 
         // vamos persistir as entidades = salvar no banco
         this.cargoRepository.saveAll(List.of(c1, c2, c3));

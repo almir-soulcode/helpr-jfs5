@@ -1,5 +1,6 @@
 package org.soulcodeacademy.helpr.controllers.errors;
 
+import org.soulcodeacademy.helpr.services.errors.DataIntegrityViolationException;
 import org.soulcodeacademy.helpr.services.errors.ParametrosInsuficientesError;
 import org.soulcodeacademy.helpr.services.errors.RecursoNaoEncontradoError;
 import org.springframework.http.HttpStatus;
@@ -50,5 +51,17 @@ public class ResourceExceptionHandler {
         response.setPath(request.getRequestURI());
 
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<CustomErrorResponse> dataIntegrityViolationException(DataIntegrityViolationException error, HttpServletRequest request){
+        CustomErrorResponse response = new CustomErrorResponse();
+
+        response.setTimestamp(LocalDateTime.now());
+        response.setStatus(HttpStatus.CONFLICT.value()); // 409
+        response.setMessage(error.getMessage());
+        response.setPath(request.getRequestURI());
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
     }
 }

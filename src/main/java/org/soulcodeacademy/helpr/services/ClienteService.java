@@ -3,6 +3,8 @@ package org.soulcodeacademy.helpr.services;
 import org.soulcodeacademy.helpr.domain.Cliente;
 import org.soulcodeacademy.helpr.domain.dto.ClienteDTO;
 import org.soulcodeacademy.helpr.repositories.ClienteRepository;
+
+import org.soulcodeacademy.helpr.services.errors.DataIntegrityViolationException;
 import org.soulcodeacademy.helpr.services.errors.RecursoNaoEncontradoError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,8 +46,15 @@ public class ClienteService {
     }
 
     public void deletar(Integer idCliente) {
+
         Cliente cliente = this.getCliente(idCliente);
-        this.clienteRepository.delete(cliente);
+
+        try {
+            this.clienteRepository.delete(cliente);
+
+            } catch (org.springframework.dao.DataIntegrityViolationException error){
+                throw new DataIntegrityViolationException("Não foi possível continuar operação");
+        }
     }
 }
 

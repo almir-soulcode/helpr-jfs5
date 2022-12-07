@@ -3,6 +3,7 @@ package org.soulcodeacademy.helpr.services;
 import org.soulcodeacademy.helpr.domain.Cargo;
 import org.soulcodeacademy.helpr.domain.dto.CargoDTO;
 import org.soulcodeacademy.helpr.repositories.CargoRepository;
+import org.soulcodeacademy.helpr.services.errors.DataIntegrityViolationException;
 import org.soulcodeacademy.helpr.services.errors.RecursoNaoEncontradoError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,6 +56,13 @@ public class CargoService {
     public void deletar(Integer idCargo) {
         Cargo cargo = this.getCargo(idCargo);
         // DELETE FROM cargo WHERE idCargo = ?
-        this.cargoRepository.delete(cargo);
+        try {
+            this.cargoRepository.delete(cargo);
+
+        } catch (org.springframework.dao.DataIntegrityViolationException error){
+            throw new DataIntegrityViolationException("Não foi possível continuar operação");
+        }
+
     }
+
 }
