@@ -19,7 +19,6 @@ public abstract class UsuarioDTO {
     @NotBlank(message = "CPF é obrigatório")
     protected String cpf;
 
-    @NotBlank(message = "Senha é obrigatória")
     protected String senha;
 
     public String getNome() {
