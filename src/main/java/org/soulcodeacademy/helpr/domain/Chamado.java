@@ -104,4 +104,5 @@ public class Chamado {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
 }
