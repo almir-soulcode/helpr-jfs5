@@ -47,7 +47,7 @@ public class PopulateService {
         Funcionario f2 = new Funcionario(null, "Victor Icoma", "victor.icoma@gmail.com", "51127383671", encoder.encode("12345"), null, c2);
         f2.setPerfil(Perfil.FUNCIONARIO);
 
-        Funcionario adm2 = new Funcionario(null, "Rafael Nunes", "rafadevxp@gmail.com", "025914666023", encoder.encode("rafael1"), null, c1);
+        Funcionario adm2 = new Funcionario(null, "Rafael Nunes", "rafadevxp@gmail.com", "40951144103", encoder.encode("rafael1"), null, c1);
         adm2.setPerfil(Perfil.ADMIN);
         // Integer id, String nome, String email, String cpf, String senha, String telefone
 
@@ -57,7 +57,7 @@ public class PopulateService {
         Funcionario adm4 = new Funcionario(null, "Robert Santos", "robertsantos@gmail.com", "99876755534", encoder.encode("devutil"), null, c1);
         adm4.setPerfil(Perfil.ADMIN);
 
-        Funcionario adm5 = new Funcionario(null, "Lucas Nunes", "lucasxp@gmail.com", "0986756634", encoder.encode("123456"), null, c1);
+        Funcionario adm5 = new Funcionario(null, "Lucas Nunes", "lucasxp@gmail.com", "96460176060", encoder.encode("123456"), null, c1);
         adm5.setPerfil(Perfil.ADMIN);
 
         Funcionario adm6 = new Funcionario(null, "Manoelly", "manu@gmail.com", "07078755534", encoder.encode("manuzinha"), null, c1);
