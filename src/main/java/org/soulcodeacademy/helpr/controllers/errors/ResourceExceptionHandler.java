@@ -2,6 +2,7 @@ package org.soulcodeacademy.helpr.controllers.errors;
 
 import org.soulcodeacademy.helpr.services.errors.ParametrosInsuficientesError;
 import org.soulcodeacademy.helpr.services.errors.RecursoNaoEncontradoError;
+import org.soulcodeacademy.helpr.services.errors.RecursosExcedidos;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -51,4 +52,20 @@ public class ResourceExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
     }
+
+       @ExceptionHandler(RecursosExcedidos.class)
+        public ResponseEntity<CustomErrorResponse> recursoExcedidoError(RecursosExcedidos erro, HttpServletRequest request){
+            CustomErrorResponse response = new CustomErrorResponse();
+
+
+            response.setTimestamp(LocalDateTime.now());
+            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+            response.setMessage(erro.getMessage());
+            response.setPath(request.getRequestURI());
+
+           return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+
+        }
+
+
 }

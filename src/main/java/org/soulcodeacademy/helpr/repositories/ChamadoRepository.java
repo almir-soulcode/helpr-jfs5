@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ChamadoRepository extends JpaRepository<Chamado, Integer> {
@@ -20,4 +21,7 @@ public interface ChamadoRepository extends JpaRepository<Chamado, Integer> {
     // nativeQuery = ativa a sintaxe do SQL
     @Query(value = "SELECT * FROM chamado WHERE data_abertura BETWEEN :data1 AND :data2", nativeQuery = true)
     List<Chamado> buscarEntreDatas(LocalDate data1, LocalDate data2);
+
+    @Query(value = "SELECT COUNT(*) FROM chamado WHERE id_funcionario = :id_funcionario AND status = 'ATRIBUIDO'", nativeQuery = true)
+    Optional<Integer> quantidadeDeChamados(Integer id_funcionario);
 }

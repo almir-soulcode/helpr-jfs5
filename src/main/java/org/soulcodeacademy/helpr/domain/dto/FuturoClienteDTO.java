@@ -8,18 +8,18 @@ public class FuturoClienteDTO {
 
     @NotBlank(message = "O campo nome é obrigatório!")
     @Length(max = 120, message = "Limite de caracteres excedido!")
-    protected String nome;
+    private String nome;
 
     @NotBlank(message = "O número de telefone é obrigatório!")
     private String telefone;
 
     @Email(message = "Email inválido!")
     @NotBlank(message = "Email é obrigatório!")
-    protected String email;
+    private String email;
 
     @CPF(message = "O CPF informado é inválido!")
     @NotBlank(message = "CPF é obrigatório!")
-    protected String cpf;
+    private String cpf;
 
     public String getNome() {
         return nome;
