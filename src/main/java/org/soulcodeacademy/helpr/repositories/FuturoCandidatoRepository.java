@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface FuturoCandidatoReposytory extends JpaRepository<FuturoCandidato, Integer> {
+public interface FuturoCandidatoRepository extends JpaRepository<FuturoCandidato, Integer> {
 
     List<FuturoCandidato> findByEmailCandidato(String emailCandidato);
     List<FuturoCandidato> findByNomeCompletoContaining(String nomeCompleto);

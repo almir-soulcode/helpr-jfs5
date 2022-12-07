@@ -30,7 +30,7 @@ public class PopulateService {
     private PasswordEncoder encoder;
 
     @Autowired
-    private FuturoCandidatoReposytory futuroCandidatoReposytory;
+    private FuturoCandidatoRepository futuroCandidatoReposytory;
 
     public void populate() {
         // Integer idCargo, String nome, String descricao, Double salario
