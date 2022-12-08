@@ -2,6 +2,7 @@ package org.soulcodeacademy.helpr.services;
 
 import org.soulcodeacademy.helpr.domain.*;
 import org.soulcodeacademy.helpr.domain.enums.Perfil;
+import org.soulcodeacademy.helpr.domain.enums.Setor;
 import org.soulcodeacademy.helpr.domain.enums.StatusChamado;
 import org.soulcodeacademy.helpr.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class PopulateService {
 
     @Autowired
     private FuturoClienteRepository futuroClienteRepository;
+
+    @Autowired
+    private FuturoCandidatoRepository futuroCandidatoRepository;
 
     public void populate() {
         // Integer idCargo, String nome, String descricao, Double salario
@@ -72,6 +76,18 @@ public class PopulateService {
 
         System.out.println(limite.get());
 
+
+        // Dados do futuroCandidato
+        FuturoCandidato futuroCandidato1 = new FuturoCandidato(null, "André Pereira", "andre@gmail.com", "Executa grandes projetos com eficiência e eficácia!", Setor.DESENVOLVIMENTO);
+        FuturoCandidato futuroCandidato2 = new FuturoCandidato(null, "Jhonatan Oliveira", "jhonatan@gmail.com", "Criativo e organizado", Setor.MARKETING);
+        this.futuroCandidatoRepository.save(futuroCandidato1);
+        this.futuroCandidatoRepository.save(futuroCandidato2);
+
+        List<FuturoCandidato> futuroCandidato3 = this.futuroCandidatoRepository.findByEmail("andre@gmail.com");
+        System.out.println(futuroCandidato3.toString());
+
+        List<FuturoCandidato> futuroCandidato4 = this.futuroCandidatoRepository.findByNomeCompletoContaining("Oliveira");
+        System.out.println(futuroCandidato4.toString());
     }
 }
 
