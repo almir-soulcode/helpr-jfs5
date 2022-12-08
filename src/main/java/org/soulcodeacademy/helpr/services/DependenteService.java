@@ -4,6 +4,7 @@ import org.soulcodeacademy.helpr.domain.Dependente;
 import org.soulcodeacademy.helpr.domain.Funcionario;
 import org.soulcodeacademy.helpr.domain.dto.DependenteDTO;
 import org.soulcodeacademy.helpr.repositories.DependenteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -12,9 +13,9 @@ import java.util.List;
 
 @Service
 public class DependenteService {
-
+@Autowired
     public DependenteRepository dependenteRepository;
-
+@Autowired
     public  FuncionarioService funcionarioService ;
 
     public List<Dependente> listar() {
