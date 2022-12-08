@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 
 //Filtrar os dependentes por data between;
@@ -21,7 +22,7 @@ public interface DependenteRepository extends JpaRepository<Dependente, Integer>
     @Query(value = "SELECT * FROM dependente WHERE data_abertura BETWEEN :data1 AND :data2", nativeQuery = true)
     List<Dependente> findByDataEntreFaixas(LocalDate data1, LocalDate data2);
 
-    List<Dependente> findByCpf(String cpf);
+    Optional<Dependente> findByCpf(String cpf);
 
     List<Dependente> findByescolaridade(String escolaridade);
 

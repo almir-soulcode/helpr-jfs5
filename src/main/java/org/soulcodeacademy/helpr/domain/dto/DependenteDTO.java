@@ -7,11 +7,11 @@ import org.hibernate.validator.constraints.br.CPF;
 //Escolaridade (não-vazio);
 //IdResponsavel (funcionário) (não-nulo);
 
-import org.hibernate.validator.constraints.br.CPF;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+
+
 
 public class DependenteDTO {
 
@@ -70,4 +70,6 @@ public class DependenteDTO {
     public void setIdFuncionario(Integer idFuncionario) {
         this.idFuncionario = idFuncionario;
     }
+
+
 }

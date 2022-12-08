@@ -1,7 +1,9 @@
 package org.soulcodeacademy.helpr.domain;
 
 import javax.persistence.*;
+import javax.xml.crypto.Data;
 import java.time.LocalDate;
+import java.util.Date;
 
 //Nome;
 //CPF;

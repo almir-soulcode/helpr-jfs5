@@ -4,6 +4,7 @@ import org.soulcodeacademy.helpr.domain.Dependente;
 import org.soulcodeacademy.helpr.domain.Funcionario;
 import org.soulcodeacademy.helpr.domain.dto.DependenteDTO;
 import org.soulcodeacademy.helpr.repositories.DependenteRepository;
+import org.soulcodeacademy.helpr.services.errors.RecursoNaoEncontradoError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,7 @@ public class DependenteService {
 
     public Dependente getDependente(Integer idDependendte){
         return this.dependenteRepository.findById(idDependendte)
-                .orElseThrow(() -> new RuntimeException("Dependente não encontrado!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoError("Dependente não encontrado!"));
     }
 
     public  Dependente salvar (DependenteDTO dto){
@@ -37,7 +38,7 @@ public class DependenteService {
 
             return  this.dependenteRepository.save(dependente);
         } else  {
-            throw new RuntimeException(" Acima de  18 anos");
+            throw new RecursoNaoEncontradoError(" Acima de  18 anos");
         }
     }
 
@@ -54,7 +55,7 @@ public class DependenteService {
 
             return this.dependenteRepository.save(dependente);
         } else {
-            throw new RuntimeException("Não foi possivel alterar  o responsável");
+            throw new RecursoNaoEncontradoError("Não foi possivel alterar  o responsável");
         }
      }
 
@@ -64,7 +65,10 @@ public class DependenteService {
      }
 
         public Dependente filtrarCpf(String cpf) {
-        return (Dependente) this.dependenteRepository.findByCpf(cpf);
+
+        return  this.dependenteRepository.findByCpf(cpf).orElseThrow(
+                () -> new RecursoNaoEncontradoError("Dependente não encontrado")
+        );
         }
 
     public List<Dependente> filtrarData(String valor1, String valor2){
