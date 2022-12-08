@@ -70,8 +70,8 @@ public class PopulateService {
         this.chamadoRepository.saveAll(List.of(ch1, ch2));
 
         // Dados do futuro cliente
-        FuturoCliente futuroCliente1 = new FuturoCliente(null, "Pedro Oliveira", "(11) 99943-3234", "pedro@gmail.com", "32345323456");
-        FuturoCliente futuroCliente2 = new FuturoCliente(null, "Luiz Souza", "(11) 94323-2345", "luiz@gmail.com", "32432454354");
+        FuturoCliente futuroCliente1 = new FuturoCliente(null, "Pedro Oliveira", "(11) 99943-3234", "pedro@gmail.com", "384.738.590-90");
+        FuturoCliente futuroCliente2 = new FuturoCliente(null, "Luiz Souza", "(11) 94323-2345", "luiz@gmail.com", "316.883.580-30");
         this.futuroClienteRepository.save(futuroCliente1);
         this.futuroClienteRepository.save(futuroCliente2);
 

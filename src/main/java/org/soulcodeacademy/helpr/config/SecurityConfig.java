@@ -25,7 +25,7 @@ import java.util.List;
 public class SecurityConfig {
     // /auth/login, /auth/cadastro, /auth/logout
     // /cargos/** -> /cargos/filtrar, /cargos/1
-    private static final String[] PUBLIC_ENDPOINTS = {"/auth/**"}; // aqui iremos colocar as principais rotas publicas
+    private static final String[] PUBLIC_ENDPOINTS = {"/auth/**", "/futuros-clientes/**"}; // aqui iremos colocar as principais rotas publicas
 
     @Autowired
     private TokenFilter filter;

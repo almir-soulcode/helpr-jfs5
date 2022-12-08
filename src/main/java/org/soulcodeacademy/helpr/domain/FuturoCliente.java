@@ -20,7 +20,7 @@ public class FuturoCliente {
     @Column(nullable = false, unique = true, length = 120)
     private String email;
 
-    @Column(nullable = false, unique = true, length = 11)
+    @Column(nullable = false, unique = true, length = 14)
     private String cpf;
 
     public FuturoCliente (){}
