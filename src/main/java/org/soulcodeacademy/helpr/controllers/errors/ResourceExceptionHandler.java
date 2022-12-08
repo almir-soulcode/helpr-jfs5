@@ -59,11 +59,11 @@ public class ResourceExceptionHandler {
 
 
             response.setTimestamp(LocalDateTime.now());
-            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+            response.setStatus(HttpStatus.TOO_MANY_REQUESTS.value());
             response.setMessage(erro.getMessage());
             response.setPath(request.getRequestURI());
 
-           return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+           return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body(response);
 
         }
 
