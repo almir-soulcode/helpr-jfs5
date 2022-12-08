@@ -45,13 +45,10 @@ public class ChamadoService {
     }
 
     public Chamado atualizar(Integer idChamado, ChamadoDTO dto) {
-        Chamado chamadoAtual = this.getChamado(idChamado);
-        Cliente cliente = this.clienteService.getCliente(dto.getIdCliente());
 
-        if (dto.getIdFuncionario() == null) {
-            throw new ParametrosInsuficientesError("idFuncionario obrigatório");
-        } else {
-            Funcionario funcionario = this.funcionarioService.getFuncionario(dto.getIdFuncionario());
+        Chamado chamadoAtual = this.getChamado(idChamado);
+
+        Cliente cliente = this.clienteService.getCliente(dto.getIdCliente());
 
             switch (dto.getStatus()) { // Escolha o valor de getStatus()
                 case RECEBIDO -> {
@@ -63,28 +60,42 @@ public class ChamadoService {
                     chamadoAtual.setCliente(cliente);
                 }
                 case ATRIBUIDO -> {
-                    chamadoAtual.setStatus(StatusChamado.ATRIBUIDO);
-                    chamadoAtual.setFuncionario(funcionario);
-                    chamadoAtual.setDataFechamento(null);
-                    chamadoAtual.setTitulo(dto.getTitulo());
-                    chamadoAtual.setDescricao(dto.getDescricao());
-                    chamadoAtual.setCliente(cliente);
+                    if (dto.getIdFuncionario() == null) {
+                        throw new ParametrosInsuficientesError("idFuncionario obrigatório");
+                    } else {
+                        Funcionario funcionario = this.funcionarioService.getFuncionario(dto.getIdFuncionario());
+                        chamadoAtual.setStatus(StatusChamado.ATRIBUIDO);
+                        chamadoAtual.setFuncionario(funcionario);
+                        chamadoAtual.setDataFechamento(null);
+                        chamadoAtual.setTitulo(dto.getTitulo());
+                        chamadoAtual.setDescricao(dto.getDescricao());
+                        chamadoAtual.setCliente(cliente);
+                    }
                 }
                 case CONCLUIDO -> {
-                    chamadoAtual.setStatus(StatusChamado.CONCLUIDO);
-                    chamadoAtual.setFuncionario(funcionario);
-                    chamadoAtual.setDataFechamento(LocalDate.now());
-                    chamadoAtual.setTitulo(dto.getTitulo());
-                    chamadoAtual.setDescricao(dto.getDescricao());
-                    chamadoAtual.setCliente(cliente);
+                    if (dto.getIdFuncionario() == null) {
+                        throw new ParametrosInsuficientesError("idFuncionario obrigatório");
+                    } else {
+                        Funcionario funcionario = this.funcionarioService.getFuncionario(dto.getIdFuncionario());
+                        chamadoAtual.setStatus(StatusChamado.CONCLUIDO);
+                        chamadoAtual.setFuncionario(funcionario);
+                        chamadoAtual.setDataFechamento(LocalDate.now());
+                        chamadoAtual.setTitulo(dto.getTitulo());
+                        chamadoAtual.setDescricao(dto.getDescricao());
+                        chamadoAtual.setCliente(cliente);
+                    }
                 }
                 case ARQUIVADO -> {
-                    chamadoAtual.setStatus(StatusChamado.ARQUIVADO);
-                    chamadoAtual.setFuncionario(funcionario);
-                    chamadoAtual.setDataFechamento(null);
+                    if (dto.getIdFuncionario() == null) {
+                        throw new ParametrosInsuficientesError("idFuncionario obrigatório");
+                    } else {
+                        Funcionario funcionario = this.funcionarioService.getFuncionario(dto.getIdFuncionario());
+                        chamadoAtual.setStatus(StatusChamado.ARQUIVADO);
+                        chamadoAtual.setFuncionario(funcionario);
+                        chamadoAtual.setDataFechamento(null);
+                    }
                 }
             }
-        }
 
         return this.chamadoRepository.save(chamadoAtual);
     }
