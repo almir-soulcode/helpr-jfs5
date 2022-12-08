@@ -47,9 +47,6 @@ public class ChamadoService {
     public Chamado atualizar(Integer idChamado, ChamadoDTO dto) {
         Chamado chamadoAtual = this.getChamado(idChamado);
         Cliente cliente = this.clienteService.getCliente(dto.getIdCliente());
-        chamadoAtual.setTitulo(dto.getTitulo());
-        chamadoAtual.setDescricao(dto.getDescricao());
-        chamadoAtual.setCliente(cliente);
 
         if (dto.getIdFuncionario() == null) {
             throw new ParametrosInsuficientesError("idFuncionario obrigatório");
@@ -61,16 +58,30 @@ public class ChamadoService {
                     chamadoAtual.setStatus(StatusChamado.RECEBIDO);
                     chamadoAtual.setFuncionario(null);
                     chamadoAtual.setDataFechamento(null);
+                    chamadoAtual.setTitulo(dto.getTitulo());
+                    chamadoAtual.setDescricao(dto.getDescricao());
+                    chamadoAtual.setCliente(cliente);
                 }
                 case ATRIBUIDO -> {
                     chamadoAtual.setStatus(StatusChamado.ATRIBUIDO);
                     chamadoAtual.setFuncionario(funcionario);
                     chamadoAtual.setDataFechamento(null);
+                    chamadoAtual.setTitulo(dto.getTitulo());
+                    chamadoAtual.setDescricao(dto.getDescricao());
+                    chamadoAtual.setCliente(cliente);
                 }
                 case CONCLUIDO -> {
                     chamadoAtual.setStatus(StatusChamado.CONCLUIDO);
                     chamadoAtual.setFuncionario(funcionario);
                     chamadoAtual.setDataFechamento(LocalDate.now());
+                    chamadoAtual.setTitulo(dto.getTitulo());
+                    chamadoAtual.setDescricao(dto.getDescricao());
+                    chamadoAtual.setCliente(cliente);
+                }
+                case ARQUIVADO -> {
+                    chamadoAtual.setStatus(StatusChamado.ARQUIVADO);
+                    chamadoAtual.setFuncionario(funcionario);
+                    chamadoAtual.setDataFechamento(null);
                 }
             }
         }
