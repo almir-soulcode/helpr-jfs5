@@ -32,6 +32,11 @@ public class FuncionarioController {
         return this.funcionarioService.getFuncionario(idFuncionario);
     }
 
+    @GetMapping("/funcionarios/foto/nula")
+    public List<Funcionario> getFuncionariosComFotoNula(){
+        return this.funcionarioService.listarFuncionairiosComFotoNula();
+    }
+
     // POST = Representa inserção de dados
     @PostMapping("/funcionarios")
     public Funcionario salvar(@Valid @RequestBody FuncionarioDTO dto) {
