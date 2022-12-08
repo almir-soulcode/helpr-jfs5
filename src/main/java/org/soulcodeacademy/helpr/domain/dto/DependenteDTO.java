@@ -19,7 +19,7 @@ public class DependenteDTO {
     @CPF(message = "O CPF informado é inválido!")
     private String cpf;
 
-    @NotBlank(message = "Campo data de Nascimento é obrigatório.")
+    @NotNull(message = "Campo data de Nascimento é obrigatório.")
     private LocalDate dataNasc;
 
     @NotBlank(message = "Campo escolaridade é obrigatório.")

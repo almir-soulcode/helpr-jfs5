@@ -41,7 +41,7 @@ public class ChamadoService {
     }
 
     public Chamado salvar(ChamadoDTO dto) {
-        this.limiteDechamado(dto.getIdFuncionario());
+
         // Verificar se existe um cliente com este ID
         Cliente cliente = this.clienteService.getCliente(dto.getIdCliente());
         Chamado chamado = new Chamado(null, dto.getTitulo(), dto.getDescricao());
@@ -106,6 +106,7 @@ public class ChamadoService {
 
     public void limiteDechamado(Integer idFuncionario){
         Optional<Integer> limite = this.chamadoRepository.quantidadeDeChamados(idFuncionario);
+
         this.limiteChamado = limite.get();
         System.out.println(this.limiteChamado);
         if (this.limiteChamado >=3){
