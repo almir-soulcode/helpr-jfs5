@@ -1,6 +1,7 @@
 package org.soulcodeacademy.helpr.domain;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 //Nome;
 //CPF;
@@ -20,23 +21,26 @@ public class Dependente {
     private String cpf;
 
     @Column(nullable = false)
-    private String dataDeNascimento;
+    private LocalDate dataDeNascimento;
 
     @Column(nullable = false)
     private String escolaridade;
 
+
+
     @ManyToOne
-    @JoinColumn(name = "id_responsavel", nullable = false) // Cria a coluna "id_responsavel" em dependente
-    private Funcionario responsavel;
+    @JoinColumn(name = "id_funcionario", nullable = false) // Cria a coluna "id_responsavel" em dependente
+    private Funcionario funcionario;
 
     public Dependente() {}
 
-    public Dependente(Integer idDependente, String nome, String cpf, String dataDeNascimento, String escolaridade) {
+    public Dependente(Integer idDependente, String nome, String cpf, LocalDate dataDeNascimento, String escolaridade, Funcionario funcionario) {
         this.idDependente = idDependente;
         this.nome = nome;
         this.cpf = cpf;
         this.dataDeNascimento = dataDeNascimento;
         this.escolaridade = escolaridade;
+        this.funcionario = funcionario;
     }
 
     public Integer getIdDependente() {
@@ -63,11 +67,11 @@ public class Dependente {
         this.cpf = cpf;
     }
 
-    public String getDataDeNascimento() {
+    public LocalDate getDataDeNascimento() {
         return dataDeNascimento;
     }
 
-    public void setDataDeNascimento(String dataDeNascimento) {
+    public void setDataDeNascimento(LocalDate dataDeNascimento) {
         this.dataDeNascimento = dataDeNascimento;
     }
 
@@ -75,15 +79,15 @@ public class Dependente {
         return escolaridade;
     }
 
-    public void setEscolaridade (String escolaridade) {
+    public void setEscolaridade(String escolaridade) {
         this.escolaridade = escolaridade;
     }
 
-    public Funcionario getResponsavel() {
-        return responsavel;
+    public Funcionario getFuncionario() {
+        return funcionario;
     }
 
-    public void setResponsavel(Funcionario responsavel) {
-        this.responsavel = responsavel;
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
 }
