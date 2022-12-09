@@ -12,19 +12,19 @@ public class FuturoCandidato {
     @Column(nullable = false, length = 80)
     private String nome;
 
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false, length = 30, unique = true)
     private String email;
 
     @Column(nullable = false, length = 500)
     private String descricaoHabilidades;
 
     @Column(nullable = false, length = 80)
-    private String setor;
+    private Enum setor;
 
     // Construtor  vazio para ser usado pela ORM
     public FuturoCandidato() {}
 
-    public FuturoCandidato(Integer idFuturoCandidato,String nome,String descricaoHabilidades,String setor) {
+    public FuturoCandidato(Integer idFuturoCandidato,String nome,String descricaoHabilidades,Enum setor) {
 
         this.idFuturoCandidato = idFuturoCandidato;
         this.nome = nome;
@@ -66,11 +66,13 @@ public class FuturoCandidato {
         this.descricaoHabilidades = descricaoHabilidades;
     }
 
-    public String getSetor() {
+    public Enum getSetor() {
         return setor;
     }
 
-    public void setSetor(String setor) {
+    public void setSetor(Enum setor) {
         this.setor = setor;
     }
 }
+
+
